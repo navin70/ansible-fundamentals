@@ -1,5 +1,5 @@
 - name: bootstrap monitoring server
-  hosts: monitoring
+  hosts: all
   become: True
   vars:
     loki_server: loki_server.local
