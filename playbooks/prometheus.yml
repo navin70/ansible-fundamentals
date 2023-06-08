@@ -1,0 +1,30 @@
+---
+- name: Install Prometheus on RedHat/Ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: Add Prometheus repository
+      when: ansible_os_family == 'RedHat'
+      yum_repository:
+        name: prometheus
+        description: Prometheus Repository
+        baseurl: https://packagecloud.io/prometheus/stable/el/7/$basearch
+        gpgcheck: no
+        enabled: yes
+
+    - name: Add Prometheus repository
+      when: ansible_os_family == 'Debian'
+      apt_repository:
+        repo: deb https://packagecloud.io/prometheus/stable/debian/ stretch main
+        state: present
+
+    - name: Install Prometheus
+      package:
+        name: prometheus
+        state: latest
+
+    - name: Start and enable Prometheus service
+      service:
+        name: prometheus
+        state: started
+        enabled: yes
