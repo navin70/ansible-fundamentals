@@ -1,5 +1,7 @@
 - name: Install NGINX and configure a simple web server
   hosts: all
+  vars:
+    - nginx_port: 80
   collections:
     - nginxinc.nginx_core
   tasks:
