@@ -1,0 +1,9 @@
+---
+# tasks file for nginx
+
+- name: Install NGINX
+  package: name=nginx state=installed
+
+- name: Run Service
+  service: name=nginx state=running
+
